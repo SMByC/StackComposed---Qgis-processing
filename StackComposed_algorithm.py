@@ -23,8 +23,8 @@ from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (QgsProcessing,
                        QgsFeatureSink,
                        QgsProcessingAlgorithm,
-                       QgsProcessingParameterFeatureSource,
-                       QgsProcessingParameterFeatureSink)
+                       QgsProcessingParameterMultipleLayers,
+                       QgsProcessingParameterRasterDestination)
 
 
 class StackComposedAlgorithm(QgsProcessingAlgorithm):
@@ -45,8 +45,8 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
     # used when calling the algorithm from another algorithm, or when
     # calling from the QGIS console.
 
-    OUTPUT = 'OUTPUT'
     INPUT = 'INPUT'
+    OUTPUT = 'OUTPUT'
 
     def initAlgorithm(self, config):
         """
@@ -57,10 +57,10 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
         # We add the input vector features source. It can have any kind of
         # geometry.
         self.addParameter(
-            QgsProcessingParameterFeatureSource(
+            QgsProcessingParameterMultipleLayers(
                 self.INPUT,
-                self.tr('Input layer'),
-                [QgsProcessing.TypeVectorAnyGeometry]
+                self.tr('All input raster files'),
+                QgsProcessing.TypeRaster
             )
         )
 
@@ -68,9 +68,9 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
         # usually takes the form of a newly created vector layer when the
         # algorithm is run in QGIS).
         self.addParameter(
-            QgsProcessingParameterFeatureSink(
+            QgsProcessingParameterRasterDestination(
                 self.OUTPUT,
-                self.tr('Output layer')
+                self.tr('Output raster stack composed')
             )
         )
 
