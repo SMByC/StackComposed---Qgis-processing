@@ -32,16 +32,8 @@ from qgis.core import (QgsProcessing,
 
 class StackComposedAlgorithm(QgsProcessingAlgorithm):
     """
-    This is an example algorithm that takes a vector layer and
-    creates a new identical one.
-
-    It is meant to be used as an example of how to create your own
-    algorithms and explain methods and variables used to do it. An
-    algorithm like this will be available in all elements, and there
-    is not need for additional work.
-
-    All Processing algorithms should extend the QgsProcessingAlgorithm
-    class.
+    This algorithm compute a specific statistic using the time
+    series of all pixels across (the time) all raster in the specific band
     """
 
     # Constants used to refer to parameters and outputs. They will be
@@ -70,8 +62,6 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
         with some other properties.
         """
 
-        # We add the input vector features source. It can have any kind of
-        # geometry.
         parameter_input = \
             QgsProcessingParameterMultipleLayers(
                 self.INPUT,
@@ -95,6 +85,7 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
                 self.BAND,
                 self.tr('Set the band number to process'),
                 type=QgsProcessingParameterNumber.Integer,
+                minValue=1,
                 defaultValue=1,
                 optional=False
             )
