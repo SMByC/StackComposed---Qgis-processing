@@ -18,13 +18,16 @@
  *                                                                         *
  ***************************************************************************/
 """
+from multiprocessing import cpu_count
 
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (QgsProcessing,
                        QgsFeatureSink,
                        QgsProcessingAlgorithm,
                        QgsProcessingParameterMultipleLayers,
-                       QgsProcessingParameterRasterDestination)
+                       QgsProcessingParameterRasterDestination, QgsProcessingParameterNumber,
+                       QgsProcessingParameterEnum, QgsProcessingParameterDefinition,
+                       QgsProcessingParameterString)
 
 
 class StackComposedAlgorithm(QgsProcessingAlgorithm):
@@ -46,7 +49,20 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
     # calling from the QGIS console.
 
     INPUT = 'INPUT'
+    STAT = 'STAT'
+    BAND = 'BAND'
+    DATA_TYPE = 'DATA_TYPE'
+    NODATA_INPUT = 'NODATA_INPUT'
+    START_DATE = 'START_DATE'
+    END_DATE = 'END_DATE'
+    NUM_PROCESS = 'NUM_PROCESS'
+    CHUNKS = 'CHUNKS'
     OUTPUT = 'OUTPUT'
+
+    STAT_LIST = ['median', 'mean', 'gmean', 'max', 'min', 'std', 'valid_pixels', 'last_pixel', 'jday_last_pixel',
+                 'jday_median', 'linear_trend']
+    TYPES = ['Default', 'Byte', 'Int16', 'UInt16', 'UInt32', 'Int32', 'Float32', 'Float64', 'CInt16', 'CInt32',
+             'CFloat32', 'CFloat64']
 
     def initAlgorithm(self, config):
         """
@@ -56,17 +72,94 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
 
         # We add the input vector features source. It can have any kind of
         # geometry.
-        self.addParameter(
+        parameter_input = \
             QgsProcessingParameterMultipleLayers(
                 self.INPUT,
-                self.tr('All input raster files'),
-                QgsProcessing.TypeRaster
+                self.tr('Input raster files'),
+                QgsProcessing.TypeRaster,
+            )
+        parameter_input.setMinimumNumberInputs(2)
+        self.addParameter(parameter_input)
+
+        self.addParameter(
+            QgsProcessingParameterEnum(
+                self.STAT,
+                self.tr('Statistic for compute the composed'),
+                self.STAT_LIST,
+                allowMultiple=False,
             )
         )
 
-        # We add a feature sink in which to store our processed features (this
-        # usually takes the form of a newly created vector layer when the
-        # algorithm is run in QGIS).
+        self.addParameter(
+            QgsProcessingParameterNumber(
+                self.BAND,
+                self.tr('Set the band number to process'),
+                type=QgsProcessingParameterNumber.Integer,
+                defaultValue=1,
+                optional=False
+            )
+        )
+
+        self.addParameter(
+            QgsProcessingParameterEnum(
+                self.DATA_TYPE,
+                self.tr('Output data type'),
+                self.TYPES,
+                allowMultiple=False,
+                defaultValue=0
+            )
+        )
+
+        self.addParameter(
+            QgsProcessingParameterNumber(
+                self.NODATA_INPUT,
+                self.tr('Input pixel value to treat as "nodata"'),
+                type=QgsProcessingParameterNumber.Integer,
+                defaultValue=None,
+                optional=True
+            )
+        )
+
+        self.addParameter(
+            QgsProcessingParameterString(
+                self.START_DATE,
+                self.tr('Initial date for filter data, format YYYY-MM-DD'),
+                defaultValue=None,
+                optional=True
+            )
+        )
+
+        self.addParameter(
+            QgsProcessingParameterString(
+                self.END_DATE,
+                self.tr('End date for filter data, format YYYY-MM-DD'),
+                defaultValue=None,
+                optional=True
+            )
+        )
+
+        parameter_num_process = \
+            QgsProcessingParameterNumber(
+                self.NUM_PROCESS,
+                self.tr('Set the number of process'),
+                type=QgsProcessingParameterNumber.Integer,
+                defaultValue=cpu_count(),
+                optional=True
+            )
+        parameter_num_process.setFlags(parameter_num_process.flags() | QgsProcessingParameterDefinition.FlagAdvanced)
+        self.addParameter(parameter_num_process)
+
+        parameter_chunks = \
+            QgsProcessingParameterNumber(
+                self.CHUNKS,
+                self.tr('Chunks size for parallel process'),
+                type=QgsProcessingParameterNumber.Integer,
+                defaultValue=500,
+                optional=True
+            )
+        parameter_chunks.setFlags(parameter_chunks.flags() | QgsProcessingParameterDefinition.FlagAdvanced)
+        self.addParameter(parameter_chunks)
+
         self.addParameter(
             QgsProcessingParameterRasterDestination(
                 self.OUTPUT,
