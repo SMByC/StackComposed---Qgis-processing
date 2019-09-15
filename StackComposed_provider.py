@@ -18,9 +18,14 @@
  *                                                                         *
  ***************************************************************************/
 """
+import os
 
+from qgis.PyQt.QtGui import QIcon
 from qgis.core import QgsProcessingProvider
 from StackComposed.StackComposed_algorithm import StackComposedAlgorithm
+
+# plugin path
+plugin_folder = os.path.dirname(os.path.dirname(__file__))
 
 
 class StackComposedProvider(QgsProcessingProvider):
@@ -68,7 +73,7 @@ class StackComposedProvider(QgsProcessingProvider):
         Should return a QIcon which is used for your provider inside
         the Processing toolbox.
         """
-        return QgsProcessingProvider.icon(self)
+        return QIcon(os.path.join(plugin_folder, 'icons', 'stack_composed.svg'))
 
     def longName(self):
         """
