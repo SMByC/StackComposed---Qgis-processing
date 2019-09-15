@@ -51,8 +51,13 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
     CHUNKS = 'CHUNKS'
     OUTPUT = 'OUTPUT'
 
-    STAT_LIST = ['median', 'mean', 'gmean', 'max', 'min', 'std', 'valid_pixels', 'last_pixel', 'jday_last_pixel',
-                 'jday_median', 'linear_trend']
+    STAT_DICT = {'Median': 'median', 'Arithmetic mean': 'mean', 'Geometric mean': 'gmean',
+                 'Maximum value': 'max', 'Minimum value': 'min', 'Standard deviation': 'std',
+                 'Number of valid pixels': 'valid_pixels',
+                 'Last valid pixel (required filename as metadata)': 'last_pixel',
+                 'Julian day of the last valid pixel (required filename as metadata)': 'jday_last_pixel',
+                 'Julian day of the median value (required filename as metadata)': 'jday_median',
+                 'Linear trend least-squares method (required filename as metadata)': 'linear_trend'}
     TYPES = ['Default', 'Byte', 'Int16', 'UInt16', 'UInt32', 'Int32', 'Float32', 'Float64', 'CInt16', 'CInt32',
              'CFloat32', 'CFloat64']
 
@@ -75,7 +80,7 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterEnum(
                 self.STAT,
                 self.tr('Statistic for compute the composed'),
-                self.STAT_LIST,
+                self.STAT_DICT.keys(),
                 allowMultiple=False,
             )
         )
