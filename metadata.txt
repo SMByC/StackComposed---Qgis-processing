@@ -1,0 +1,33 @@
+# This file contains metadata for your plugin.
+
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=Stack Composed
+description=Compute and generate the composed of a raster images stack
+about=It is a Qgis processing provider to calculate the stack composed of a specific statistic for time series of raster layers 
+
+version=0.1
+qgisMinimumVersion=3.0
+qgisMaximumVersion=3.99
+
+author=Xavier Corredor Llano, SMByC
+email=xcorredorl@ideam.gov.co
+
+homepage=https://smbyc.github.io/StackComposed-Qgis-processing
+tracker=https://github.com/SMByC/StackComposed-Qgis-processing/issues
+repository=https://github.com/SMByC/StackComposed-Qgis-processing
+
+changelog=
+    19.8.15:
+    - ..
+
+tags=raster,stack,layers,statistics
+
+external_deps=
+
+category=Analysis
+icon=icons/stack_composed.svg
+experimental=False
+deprecated=False
+server=False
