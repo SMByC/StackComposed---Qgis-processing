@@ -50,6 +50,8 @@ Dependency = namedtuple('Dep', ['name', 'min', 'install'])
 #   install: fix/exact version number or None
 #   min: minimum version number or None
 DEPS = [
+    Dependency('toolz', install=None, min=None),
+    Dependency('cloudpickle', install=None, min=None),
     Dependency('dask', install=None, min=None),
 ]
 

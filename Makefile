@@ -36,19 +36,23 @@ LOCALES =
 # translation
 SOURCES = \
 	__init__.py \
-	StackComposed.py 
+	StackComposed_algorithm.py \
+	StackComposed_plugin.py \
+	StackComposed_provider.py
 
 PLUGINNAME = StackComposed
 
 PY_FILES = \
 	__init__.py \
-	StackComposed.py 
+	StackComposed_algorithm.py \
+	StackComposed_plugin.py \
+	StackComposed_provider.py
 
 UI_FILES = 
 
 EXTRAS = metadata.txt 
 
-EXTRA_DIRS = core utils gui ui icons
+EXTRA_DIRS = core utils icons
 
 COMPILED_RESOURCE_FILES = resources.py
 
