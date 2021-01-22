@@ -5,8 +5,8 @@
                           A QGIS plugin processing
  Compute and generate the composed of a raster images stack
                               -------------------
-        copyright            : (C) 2019 by Xavier Corredor Llano, SMByC
-        email                : xcorredorl@ideam.gov.co
+        copyright            : (C) 2021 by Xavier Corredor Llano, SMByC
+        email                : xavier.corredor.llano@gmail.com
  ***************************************************************************/
 
 /***************************************************************************

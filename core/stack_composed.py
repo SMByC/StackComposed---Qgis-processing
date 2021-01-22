@@ -1,24 +1,23 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
-#  Stack Composed
-#
-#  Copyright (C) 2016-2018 Xavier Corredor Llano, SMBYC
-#  Email: xcorredorl at ideam.gov.co
-#
-#  This program is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
+"""
+/***************************************************************************
+ StackComposed
+                          A QGIS plugin processing
+ Compute and generate the composed of a raster images stack
+                              -------------------
+        copyright            : (C) 2021 by Xavier Corredor Llano, SMByC
+        email                : xavier.corredor.llano@gmail.com
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+"""
 import warnings
 import numpy as np
 from osgeo import gdal, osr
