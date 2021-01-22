@@ -4,7 +4,7 @@
 
 [general]
 name=Stack Composed
-description=Compute and generate the composed of a raster images stack
+description=Compute and generate the composed of a raster images stack through combine and reduce by a statistic
 about=It is a Qgis processing provider to calculate the stack composed of a specific statistic for time series of raster layers 
 
 version=0.1

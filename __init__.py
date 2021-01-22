@@ -28,5 +28,5 @@ def classFactory(iface):  # pylint: disable=invalid-name
     :type iface: QgsInterface
     """
     #
-    from StackComposed.StackComposed import StackComposedPlugin
+    from StackComposed.StackComposed_plugin import StackComposedPlugin
     return StackComposedPlugin()
