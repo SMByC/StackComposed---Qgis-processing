@@ -28,7 +28,7 @@ from StackComposed.core.image import Image
 from StackComposed.core.stats import statistic
 
 
-def run(stat, band, nodata, output, output_type, num_process, chunksize, start_date, end_date, images_files, feedback):
+def run(stat, band, nodata, output, output_type, num_process, chunksize, images_files, feedback):
     # ignore warnings
     warnings.filterwarnings("ignore")
 
@@ -36,14 +36,6 @@ def run(stat, band, nodata, output, output_type, num_process, chunksize, start_d
 
     # load images
     images = [Image(img) for img in images_files]
-
-    # filter images based on the start date and/or end date, required filename as metadata
-    if start_date not in [None, ''] or end_date not in [None, '']:
-        [image.set_metadata_from_filename() for image in images]
-        if start_date not in [None, '']:
-            images = [image for image in images if image.date >= start_date]
-        if end_date not in [None, '']:
-            images = [image for image in images if image.date <= end_date]
 
     if len(images) <= 1:
         raise QgsProcessingException(

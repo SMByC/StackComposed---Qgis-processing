@@ -49,8 +49,6 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
     BAND = 'BAND'
     NODATA_INPUT = 'NODATA_INPUT'
     DATA_TYPE = 'DATA_TYPE'
-    START_DATE = 'START_DATE'
-    END_DATE = 'END_DATE'
     NUM_PROCESS = 'NUM_PROCESS'
     CHUNKS = 'CHUNKS'
     OUTPUT = 'OUTPUT'
@@ -163,24 +161,6 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
             )
         )
 
-        self.addParameter(
-            QgsProcessingParameterString(
-                self.START_DATE,
-                self.tr('Initial date for filter data, format YYYY-MM-DD'),
-                defaultValue=None,
-                optional=True
-            )
-        )
-
-        self.addParameter(
-            QgsProcessingParameterString(
-                self.END_DATE,
-                self.tr('End date for filter data, format YYYY-MM-DD'),
-                defaultValue=None,
-                optional=True
-            )
-        )
-
         parameter_num_process = \
             QgsProcessingParameterNumber(
                 self.NUM_PROCESS,
@@ -228,8 +208,6 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
             output_type=self.TYPES[self.parameterAsEnum(parameters, self.DATA_TYPE, context)],
             num_process=self.parameterAsInt(parameters, self.NUM_PROCESS, context),
             chunksize=self.parameterAsInt(parameters, self.CHUNKS, context),
-            start_date=self.parameterAsString(parameters, self.START_DATE, context),
-            end_date=self.parameterAsString(parameters, self.END_DATE, context),
             images_files=images_files,
             feedback=feedback)
 
