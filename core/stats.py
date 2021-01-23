@@ -22,9 +22,10 @@ import dask.array as da
 import numpy as np
 
 from StackComposed.core.image import Image
+from StackComposed.utils.progress import ProgressBar
 
 
-def statistic(stat, images, band, num_process, chunksize):
+def statistic(stat, images, band, num_process, chunksize, feedback):
     # create a empty initial wrapper raster for managed dask parallel
     # in chunks and storage result
     wrapper_array = da.empty(Image.wrapper_shape, chunks=chunksize)
@@ -156,6 +157,9 @@ def statistic(stat, images, band, num_process, chunksize):
 
     # Compute the statistical for the respective chunk
     def calc(block, block_id=None, chunksize=None):
+        if feedback.isCanceled():
+            return
+
         yc = block_id[0] * chunksize
         yc_size = block.shape[0]
         xc = block_id[1] * chunksize
@@ -182,7 +186,8 @@ def statistic(stat, images, band, num_process, chunksize):
         return stat_func(stack_chunk, metadata)
 
     # process
-    map_blocks = da.map_blocks(calc, wrapper_array, chunks=wrapper_array.chunks, chunksize=chunksize, dtype=float)
-    result_array = map_blocks.compute(num_workers=num_process, scheduler="threads")
+    with ProgressBar(feedback=feedback):
+        map_blocks = da.map_blocks(calc, wrapper_array, chunks=wrapper_array.chunks, chunksize=chunksize, dtype=float)
+        result_array = map_blocks.compute(num_workers=num_process, scheduler="threads")
 
     return result_array

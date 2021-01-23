@@ -113,7 +113,10 @@ def run(stat, band, nodata, output, output_type, num_process, chunksize, images_
     ### process ###
     # Calculate the statistics
     feedback.pushInfo("\nProcessing the {} for band {}:".format(stat, band))
-    output_array = statistic(stat, images, band, num_process, chunksize)
+    output_array = statistic(stat, images, band, num_process, chunksize, feedback)
+
+    if feedback.isCanceled():
+        return
 
     ### save result ###
     # create output raster
