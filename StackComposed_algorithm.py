@@ -91,7 +91,7 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
         Returns the name of the group this algorithm belongs to. This string
         should be localised.
         """
-        return self.tr(self.groupId())
+        return None
 
     def groupId(self):
         """
@@ -101,7 +101,7 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
         contain lowercase alphanumeric characters only and no spaces or other
         formatting characters.
         """
-        return 'Raster layer stack'
+        return None
 
     def icon(self):
         return QIcon(":/plugins/StackComposed/icons/stack_composed.svg")
