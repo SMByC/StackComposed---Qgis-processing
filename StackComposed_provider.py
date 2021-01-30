@@ -42,7 +42,7 @@ class StackComposedProvider(QgsProcessingProvider):
         Unloads the provider. Any tear-down steps required by the provider
         should be implemented here.
         """
-        pass
+        QgsProcessingProvider.unload(self)
 
     def loadAlgorithms(self):
         """
@@ -58,7 +58,7 @@ class StackComposedProvider(QgsProcessingProvider):
         string should be a unique, short, character only string, eg "qgis" or
         "gdal". This string should not be localised.
         """
-        return 'qgis'
+        return 'stack_composed'
 
     def name(self):
         """
@@ -67,7 +67,7 @@ class StackComposedProvider(QgsProcessingProvider):
 
         This string should be short (e.g. "Lastools") and localised.
         """
-        return self.tr('qgis')
+        return self.tr('Stack Composed')
 
     def icon(self):
         """

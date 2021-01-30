@@ -77,7 +77,7 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
         lowercase alphanumeric characters only and no spaces or other
         formatting characters.
         """
-        return 'Stack Composed'
+        return 'Assemble and reduce an image stack'
 
     def displayName(self):
         """
