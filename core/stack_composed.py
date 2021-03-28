@@ -56,6 +56,10 @@ def run(stat, band, nodata, output, output_type, num_process, chunksize, images_
     Image.wrapper_y_res = images[0].y_res
     Image.wrapper_shape = (int((max_y-min_y)/Image.wrapper_y_res), int((max_x-min_x)/Image.wrapper_x_res))  # (y,x)
 
+    # reset the chunksize with the min of width/high if apply
+    if chunksize > min(Image.wrapper_shape):
+        chunksize = min(Image.wrapper_shape)
+
     # some information about process
     feedback.pushInfo("  images to process: {0}".format(len(images)))
     feedback.pushInfo("  band to process: {0}".format(band))
