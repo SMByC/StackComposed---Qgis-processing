@@ -63,8 +63,16 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
 
     TYPES = ['Default', 'Byte', 'UInt16', 'Int16', 'UInt32', 'Int32', 'Float32', 'Float64']
 
-    def tr(self, string):
-        return QCoreApplication.translate('Processing', string)
+    def __init__(self):
+        super().__init__()
+
+    def tr(self, string, context=''):
+        if context == '':
+            context = self.__class__.__name__
+        return QCoreApplication.translate(context, string)
+
+    def shortHelpString(self):
+        return None
 
     def createInstance(self):
         return StackComposedAlgorithm()
