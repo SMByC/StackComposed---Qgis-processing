@@ -1,7 +1,3 @@
-# This file contains metadata for your plugin.
-
-# This file should be included when you package your plugin.# Mandatory items:
-
 [general]
 name=Stack Composed
 description=Compute and generate in a parallel process the composed of a raster images stack through assemble and reduce by a statistic
@@ -14,7 +10,7 @@ qgisMinimumVersion=3.0
 qgisMaximumVersion=3.99
 
 author=Xavier Corredor Llano, SMByC
-email=xcorredorl@ideam.gov.co
+email=xavier.corredor.llano@gmail.com
 
 homepage=https://smbyc.github.io/StackComposed-Qgis-processing
 tracker=https://github.com/SMByC/StackComposed-Qgis-processing/issues
