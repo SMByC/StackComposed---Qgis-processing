@@ -24,12 +24,10 @@ from multiprocessing import cpu_count
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (QgsProcessing,
-                       QgsFeatureSink,
                        QgsProcessingAlgorithm,
                        QgsProcessingParameterMultipleLayers,
                        QgsProcessingParameterRasterDestination, QgsProcessingParameterNumber,
-                       QgsProcessingParameterEnum, QgsProcessingParameterDefinition,
-                       QgsProcessingParameterString, QgsProcessingException, QgsRasterFileWriter)
+                       QgsProcessingParameterEnum, QgsProcessingParameterDefinition)
 
 from StackComposed.core import stack_composed
 
