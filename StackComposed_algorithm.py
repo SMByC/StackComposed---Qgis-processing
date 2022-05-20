@@ -83,12 +83,7 @@ class StackComposedAlgorithm(QgsProcessingAlgorithm):
         (such as Landsat images) and they can be different scenes or have different extents to generate a mosaic. \
         The result is an assembled image, with a  wrapper extent for all input data, with the pixel values resulting \
         from the statistic for the specific band for all the valid pixels across the time axis (z-axis), in a parallel \
-        process..</p>
-        <p>The main aim of this app are:</p>
-        - Improve the velocity of compute the stack composed
-        - Compute several statistics in the stack composed easily.
-        - Compute a stack composed for data in different position/scenes using a wrapper extent.
-        - Include the overlapping areas for compute the statistics, e.g. two adjacent scenes with overlapping areas.
+        process.</p>
         <h3 id="recommendation-for-data-input">Recommendation for input data</h3>
         <p>There are some recommendation for input data for process it, all input images need:</p>
         - To be in the same projection
