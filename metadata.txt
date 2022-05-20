@@ -2,8 +2,8 @@
 name=Stack Composed
 description=Compute and generate in a parallel process the composed of a raster images stack through assemble and reduce by a statistic
 about=StackComposed is a Qgis plugin processing that compute the stack composed (assemble and reduce) using a statistic
-to get the final value. The result is an assembled image, with a  wrapper extent for all input data, with the pixel
-values resulting from the statistic for the specific band for all the valid pixels across the time axis (z-axis)
+    to get the final value. The result is an assembled image, with a  wrapper extent for all input data, with the pixel
+    values resulting from the statistic for the specific band for all the valid pixels across the time axis (z-axis)
 
 version=22.5.20
 qgisMinimumVersion=3.0
@@ -12,7 +12,7 @@ qgisMaximumVersion=3.99
 author=Xavier Corredor Llano, SMByC
 email=xavier.corredor.llano@gmail.com
 
-homepage=https://smbyc.github.io/StackComposed-Qgis-processing
+homepage=https://github.com/SMByC/StackComposed-Qgis-processing
 tracker=https://github.com/SMByC/StackComposed-Qgis-processing/issues
 repository=https://github.com/SMByC/StackComposed-Qgis-processing
 
