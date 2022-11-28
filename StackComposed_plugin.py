@@ -35,11 +35,10 @@ if cmd_folder not in sys.path:
 class StackComposedPlugin:
 
     def __init__(self):
-        self.provider = None
+        self.provider = StackComposedProvider()
 
     def initProcessing(self):
         """Init Processing provider for QGIS >= 3.8."""
-        self.provider = StackComposedProvider()
         QgsApplication.processingRegistry().addProvider(self.provider)
 
     def initGui(self):
